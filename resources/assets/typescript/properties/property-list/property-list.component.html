@@ -1,0 +1,20 @@
+<div class="row">
+    <div class="col-sm-12">
+        <label>Property Name: </label>
+        <input placeholder="Search by property Name" [(ngModel)]="propertyNameSearch"/>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12" *ngIf="properties">
+        <div class="col-sm-4 fa-border" *ngFor="let property of properties | searchProperty:'name':propertyNameSearch ">
+            <div class="col-sm-12">
+                <div class="col-sm-8">
+                    <property-address [property]="property"></property-address>
+                </div>
+                <div class="col-sm-4">
+                    <a [routerLink]="['/property', property.id]" [innerHTML]="property.name | highlight : propertyNameSearch | safeHtml "></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
