@@ -1,6 +1,5 @@
-webpackJsonp([0],{
-
-/***/ 0:
+webpackJsonp([0],[
+/* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -10,26 +9,50 @@ webpackJsonp([0],{
 
 
 /***/ },
-
-/***/ 23:
+/* 1 */,
+/* 2 */,
+/* 3 */,
+/* 4 */,
+/* 5 */,
+/* 6 */,
+/* 7 */,
+/* 8 */,
+/* 9 */,
+/* 10 */,
+/* 11 */,
+/* 12 */,
+/* 13 */,
+/* 14 */,
+/* 15 */,
+/* 16 */,
+/* 17 */,
+/* 18 */,
+/* 19 */,
+/* 20 */,
+/* 21 */,
+/* 22 */,
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(__decorate) {"use strict";
 	var core_1 = __webpack_require__(3);
 	var platform_browser_1 = __webpack_require__(21);
-	var http_1 = __webpack_require__(25);
-	var forms_1 = __webpack_require__(26);
+	var forms_1 = __webpack_require__(25);
+	var http_1 = __webpack_require__(29);
 	var app_routing_1 = __webpack_require__(30);
-	var app_component_1 = __webpack_require__(69);
+	var router_1 = __webpack_require__(31);
+	var my_http_service_1 = __webpack_require__(64);
+	var app_component_1 = __webpack_require__(76);
+	var not_found_component_1 = __webpack_require__(74);
 	var property_list_component_1 = __webpack_require__(61);
-	var property_component_1 = __webpack_require__(67);
-	var property_address_component_1 = __webpack_require__(72);
+	var property_component_1 = __webpack_require__(72);
+	var property_address_component_1 = __webpack_require__(79);
 	var property_service_1 = __webpack_require__(63);
-	var search_pipe_1 = __webpack_require__(74);
-	var highlight_pipe_1 = __webpack_require__(75);
-	var html_pipe_1 = __webpack_require__(76);
-	var sqfeet_pipe_1 = __webpack_require__(77);
-	var unit_rent_pipe_1 = __webpack_require__(78);
+	var search_pipe_1 = __webpack_require__(81);
+	var highlight_pipe_1 = __webpack_require__(82);
+	var html_pipe_1 = __webpack_require__(83);
+	var sqfeet_pipe_1 = __webpack_require__(84);
+	var unit_rent_pipe_1 = __webpack_require__(85);
 	var AppModule = (function () {
 	    function AppModule() {
 	    }
@@ -51,13 +74,21 @@ webpackJsonp([0],{
 	            search_pipe_1.SearchPropertyPipe,
 	            highlight_pipe_1.HighlightPipe,
 	            app_component_1.AppComponent,
+	            not_found_component_1.NotFoundComponent,
 	            property_list_component_1.PropertyListComponent,
 	            property_component_1.PropertyComponent,
 	            property_address_component_1.PropertyAddressComponent
 	        ],
 	        providers: [
 	            app_routing_1.appRoutingProviders,
-	            property_service_1.PropertyService
+	            property_service_1.PropertyService,
+	            {
+	                provide: my_http_service_1.MyHttpService,
+	                useFactory: function (backend, options, router) {
+	                    return new my_http_service_1.MyHttpService(backend, options, router);
+	                },
+	                deps: [http_1.XHRBackend, http_1.RequestOptions, router_1.Router]
+	            }
 	        ],
 	        bootstrap: [
 	            app_component_1.AppComponent
@@ -69,8 +100,7 @@ webpackJsonp([0],{
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(24)))
 
 /***/ },
-
-/***/ 24:
+/* 24 */
 /***/ function(module, exports) {
 
 	function __decorate(decorators, target, key, desc) {
@@ -87,25 +117,62 @@ webpackJsonp([0],{
 	exports.__decorate = __decorate;
 
 /***/ },
-
-/***/ 30:
+/* 25 */,
+/* 26 */,
+/* 27 */,
+/* 28 */,
+/* 29 */,
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var router_1 = __webpack_require__(31);
 	var property_list_component_1 = __webpack_require__(61);
-	var property_component_1 = __webpack_require__(67);
+	var property_component_1 = __webpack_require__(72);
+	var not_found_component_1 = __webpack_require__(74);
 	var appRoutes = [
-	    { path: '', component: property_list_component_1.PropertyListComponent },
-	    { path: 'property/:id', component: property_component_1.PropertyComponent }
+	    { path: '', redirectTo: '/properties', pathMatch: 'full' },
+	    { path: 'properties', component: property_list_component_1.PropertyListComponent },
+	    { path: 'property/:id', component: property_component_1.PropertyComponent },
+	    { path: '404', component: not_found_component_1.NotFoundComponent },
+	    { path: '**', redirectTo: '404' }
 	];
 	exports.appRoutingProviders = [];
 	exports.routing = router_1.RouterModule.forRoot(appRoutes);
 
 
 /***/ },
-
-/***/ 61:
+/* 31 */,
+/* 32 */,
+/* 33 */,
+/* 34 */,
+/* 35 */,
+/* 36 */,
+/* 37 */,
+/* 38 */,
+/* 39 */,
+/* 40 */,
+/* 41 */,
+/* 42 */,
+/* 43 */,
+/* 44 */,
+/* 45 */,
+/* 46 */,
+/* 47 */,
+/* 48 */,
+/* 49 */,
+/* 50 */,
+/* 51 */,
+/* 52 */,
+/* 53 */,
+/* 54 */,
+/* 55 */,
+/* 56 */,
+/* 57 */,
+/* 58 */,
+/* 59 */,
+/* 60 */,
+/* 61 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(__decorate, __metadata) {"use strict";
@@ -128,7 +195,7 @@ webpackJsonp([0],{
 	}());
 	PropertyListComponent = __decorate([
 	    core_1.Component({
-	        template: __webpack_require__(66),
+	        template: __webpack_require__(71),
 	    }),
 	    __metadata("design:paramtypes", [property_service_1.PropertyService])
 	], PropertyListComponent);
@@ -137,8 +204,7 @@ webpackJsonp([0],{
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(24), __webpack_require__(62)))
 
 /***/ },
-
-/***/ 62:
+/* 62 */
 /***/ function(module, exports) {
 
 	function __metadata(k, v) {
@@ -152,16 +218,16 @@ webpackJsonp([0],{
 	exports.__metadata = __metadata;
 
 /***/ },
-
-/***/ 63:
+/* 63 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(__decorate, __metadata) {"use strict";
 	var core_1 = __webpack_require__(3);
-	var http_1 = __webpack_require__(25);
+	var http_1 = __webpack_require__(29);
+	var my_http_service_1 = __webpack_require__(64);
 	var Observable_1 = __webpack_require__(5);
-	__webpack_require__(64);
-	__webpack_require__(65);
+	__webpack_require__(66);
+	__webpack_require__(67);
 	var Property = (function () {
 	    function Property(id, name, description, address1, address2, country, state, city, zipcode) {
 	        this.id = id;
@@ -214,22 +280,83 @@ webpackJsonp([0],{
 	}());
 	PropertyService = __decorate([
 	    core_1.Injectable(),
-	    __metadata("design:paramtypes", [http_1.Http])
+	    __metadata("design:paramtypes", [my_http_service_1.MyHttpService])
 	], PropertyService);
 	exports.PropertyService = PropertyService;
 	
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(24), __webpack_require__(62)))
 
 /***/ },
+/* 64 */
+/***/ function(module, exports, __webpack_require__) {
 
-/***/ 66:
+	/* WEBPACK VAR INJECTION */(function(__extends, __decorate, __metadata) {"use strict";
+	var core_1 = __webpack_require__(3);
+	var http_1 = __webpack_require__(29);
+	var Observable_1 = __webpack_require__(5);
+	var router_1 = __webpack_require__(31);
+	__webpack_require__(66);
+	__webpack_require__(67);
+	__webpack_require__(68);
+	var MyHttpService = (function (_super) {
+	    __extends(MyHttpService, _super);
+	    function MyHttpService(backend, defaultOptions, router) {
+	        var _this = _super.call(this, backend, defaultOptions) || this;
+	        _this.router = router;
+	        return _this;
+	    }
+	    MyHttpService.prototype.request = function (url, options) {
+	        return _super.prototype.request.call(this, url, options).catch(this.catchErrors());
+	    };
+	    MyHttpService.prototype.catchErrors = function () {
+	        var _this = this;
+	        return function (res) {
+	            if (res.status === 404) {
+	                console.log('404');
+	                _this.router.navigate(['404']);
+	            }
+	            return Observable_1.Observable.throw(res);
+	        };
+	    };
+	    return MyHttpService;
+	}(http_1.Http));
+	MyHttpService = __decorate([
+	    core_1.Injectable(),
+	    __metadata("design:paramtypes", [http_1.XHRBackend, http_1.RequestOptions, router_1.Router])
+	], MyHttpService);
+	exports.MyHttpService = MyHttpService;
+	
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(65), __webpack_require__(24), __webpack_require__(62)))
+
+/***/ },
+/* 65 */
+/***/ function(module, exports) {
+
+	function __extends (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	}
+	
+	if (typeof module !== 'undefined' && module.exports) {
+	    exports = module.exports = __extends;
+	}
+	
+	exports.__extends = __extends;
+
+/***/ },
+/* 66 */,
+/* 67 */,
+/* 68 */,
+/* 69 */,
+/* 70 */,
+/* 71 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"row\">\r\n    <div class=\"col-sm-12\">\r\n        <label>Property Name: </label>\r\n        <input placeholder=\"Search by property Name\" [(ngModel)]=\"propertyNameSearch\"/>\r\n    </div>\r\n</div>\r\n<div class=\"row\">\r\n    <div class=\"col-sm-12\" *ngIf=\"properties\">\r\n        <div class=\"col-sm-4 fa-border\" *ngFor=\"let property of properties | searchProperty:'name':propertyNameSearch \">\r\n            <div class=\"col-sm-12\">\r\n                <div class=\"col-sm-8\">\r\n                    <property-address [property]=\"property\"></property-address>\r\n                </div>\r\n                <div class=\"col-sm-4\">\r\n                    <a [routerLink]=\"['/property', property.id]\" [innerHTML]=\"property.name | highlight : propertyNameSearch | safeHtml \"></a>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>"
 
 /***/ },
-
-/***/ 67:
+/* 72 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(__decorate, __metadata) {"use strict";
@@ -262,7 +389,7 @@ webpackJsonp([0],{
 	}());
 	PropertyComponent = __decorate([
 	    core_1.Component({
-	        template: __webpack_require__(68)
+	        template: __webpack_require__(73)
 	    }),
 	    __metadata("design:paramtypes", [router_1.ActivatedRoute,
 	        router_1.Router,
@@ -273,15 +400,39 @@ webpackJsonp([0],{
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(24), __webpack_require__(62)))
 
 /***/ },
-
-/***/ 68:
+/* 73 */
 /***/ function(module, exports) {
 
 	module.exports = "<div *ngIf=\"property\">\r\n    <div class=\"row\">\r\n        <div class=\"col-sm-12\">\r\n            <div class=\"col-sm-6\">\r\n                <h3>{{property.name}}</h3>\r\n                <p>{{property.description}}</p>\r\n            </div>\r\n            <div class=\"col-sm-6\">\r\n                <property-address [property]=\"property\"></property-address>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"row\" *ngIf=\"property.units\">\r\n        <div class=\"col-sm-12\">\r\n            <h3>Units</h3>\r\n            <div class=\"col-sm-12\">\r\n                <table class=\"table table-striped\">\r\n                    <thead>\r\n                    <tr>\r\n                        <th>Unit #</th>\r\n                        <th>SqFeet</th>\r\n                        <th>Bedrooms</th>\r\n                        <th>Bathrooms</th>\r\n                        <th>Rent</th>\r\n                    </tr>\r\n                    </thead>\r\n                    <tbody>\r\n                    <tr *ngFor=\"let unit of property.units\">\r\n                        <td>{{unit.unit_number}}</td>\r\n                        <td [innerHTML]=\"unit.sqfeet | sqfeet | safeHtml \"></td>\r\n                        <td>{{unit.bedrooms}}</td>\r\n                        <td>{{unit.bathrooms}}</td>\r\n                        <td>{{unit.rental_amount | currency:'USD':true | unitRent:unit.rental_type}}</td>\r\n                    </tr>\r\n                    </tbody>\r\n                </table>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n"
 
 /***/ },
+/* 74 */
+/***/ function(module, exports, __webpack_require__) {
 
-/***/ 69:
+	/* WEBPACK VAR INJECTION */(function(__decorate) {"use strict";
+	var core_1 = __webpack_require__(3);
+	var NotFoundComponent = (function () {
+	    function NotFoundComponent() {
+	    }
+	    return NotFoundComponent;
+	}());
+	NotFoundComponent = __decorate([
+	    core_1.Component({
+	        template: __webpack_require__(75)
+	    })
+	], NotFoundComponent);
+	exports.NotFoundComponent = NotFoundComponent;
+	
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(24)))
+
+/***/ },
+/* 75 */
+/***/ function(module, exports) {
+
+	module.exports = "<div class=\"row\">\r\n    <div class=\"col-md-12\">\r\n        <div>\r\n            <h1>\r\n                Oops!</h1>\r\n            <h2>\r\n                404 Not Found</h2>\r\n            <div>\r\n                Sorry, an error has occured, Requested page not found!\r\n            </div>\r\n            <div>\r\n                <a href=\"/\" ui-sref=\"properties\" class=\"btn btn-primary btn-lg\">\r\n                    Take Me Home\r\n                </a>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n"
+
+/***/ },
+/* 76 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(__decorate) {"use strict";
@@ -294,8 +445,8 @@ webpackJsonp([0],{
 	AppComponent = __decorate([
 	    core_1.Component({
 	        selector: 'my-app',
-	        template: __webpack_require__(70),
-	        styles: [__webpack_require__(71)]
+	        template: __webpack_require__(77),
+	        styles: [__webpack_require__(78)]
 	    })
 	], AppComponent);
 	exports.AppComponent = AppComponent;
@@ -303,22 +454,19 @@ webpackJsonp([0],{
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(24)))
 
 /***/ },
-
-/***/ 70:
+/* 77 */
 /***/ function(module, exports) {
 
 	module.exports = "<p>Laravel5 + Angular2 application</p>\n<router-outlet></router-outlet>"
 
 /***/ },
-
-/***/ 71:
+/* 78 */
 /***/ function(module, exports) {
 
 	module.exports = "p {\n  color: red; }\n"
 
 /***/ },
-
-/***/ 72:
+/* 79 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(__decorate, __metadata) {"use strict";
@@ -336,7 +484,7 @@ webpackJsonp([0],{
 	PropertyAddressComponent = __decorate([
 	    core_1.Component({
 	        selector: 'property-address',
-	        template: __webpack_require__(73),
+	        template: __webpack_require__(80),
 	    })
 	], PropertyAddressComponent);
 	exports.PropertyAddressComponent = PropertyAddressComponent;
@@ -344,15 +492,13 @@ webpackJsonp([0],{
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(24), __webpack_require__(62)))
 
 /***/ },
-
-/***/ 73:
+/* 80 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"row\">\r\n    <div class=\"col-sm-3\">\r\n        Country:\r\n    </div>\r\n    <div class=\"col-sm-9\">\r\n        {{property.country}}\r\n    </div>\r\n</div>\r\n<div class=\"row\">\r\n    <div class=\"col-sm-3\">\r\n        State:\r\n    </div>\r\n    <div class=\"col-sm-9\">\r\n        {{property.state}}\r\n    </div>\r\n</div>\r\n<div class=\"row\">\r\n    <div class=\"col-sm-3\">\r\n        City:\r\n    </div>\r\n    <div class=\"col-sm-9\">\r\n        {{property.city}}\r\n    </div>\r\n</div>\r\n<div class=\"row\">\r\n    <div class=\"col-sm-3\">\r\n        ZipCode:\r\n    </div>\r\n    <div class=\"col-sm-9\">\r\n        {{property.zipcode}}\r\n    </div>\r\n</div>"
 
 /***/ },
-
-/***/ 74:
+/* 81 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(__decorate) {"use strict";
@@ -382,8 +528,7 @@ webpackJsonp([0],{
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(24)))
 
 /***/ },
-
-/***/ 75:
+/* 82 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(__decorate) {"use strict";
@@ -409,8 +554,7 @@ webpackJsonp([0],{
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(24)))
 
 /***/ },
-
-/***/ 76:
+/* 83 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(__decorate, __metadata) {"use strict";
@@ -436,8 +580,7 @@ webpackJsonp([0],{
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(24), __webpack_require__(62)))
 
 /***/ },
-
-/***/ 77:
+/* 84 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(__decorate) {"use strict";
@@ -466,8 +609,7 @@ webpackJsonp([0],{
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(24)))
 
 /***/ },
-
-/***/ 78:
+/* 85 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(__decorate) {"use strict";
@@ -496,6 +638,5 @@ webpackJsonp([0],{
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(24)))
 
 /***/ }
-
-});
+]);
 //# sourceMappingURL=app.js.map

@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Http, Response }          from '@angular/http';
+import { Response }          from '@angular/http';
+import { MyHttpService } from '../my-http.service';
+
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
@@ -24,7 +26,7 @@ export class PropertyService {
 
     private propertiesUrl = 'api/property';
 
-    constructor (private http: Http) {}
+    constructor (private http: MyHttpService) {}
 
     getProperties (): Observable<Property[]> {
         return this.http.get(this.propertiesUrl)
